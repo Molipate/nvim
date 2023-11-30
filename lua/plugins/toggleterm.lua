@@ -1,3 +1,6 @@
+-- local Terminal = require('toggleterm.terminal').Terminal
+-- local 
+
 return {
     'akinsho/toggleterm.nvim',
     config = function()
@@ -15,7 +18,7 @@ return {
         -- if you only want these mappings for toggle term use term://*toggleterm#* instead
         vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
     
-        vim.keymap.set('n', '<leader>t', ':ToggleTerm direction=tab name=ToggleTerm<CR>')
+        vim.keymap.set('n', '<leader>t', ':ToggleTerm direction=vertical size=60 name=ToggleTerm<CR>')
         require('toggleterm').setup {
             open_mapping = [[<c-c>]],            
         }

@@ -1,7 +1,7 @@
 local opts = {
 	ensure_installed = {
-        "jedi_language_server",
-	},
+        "jedi_language_server", 	
+    },
 
 	automatic_installation = true,
 }
