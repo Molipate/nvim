@@ -34,6 +34,3 @@ vim.opt.tabstop = 4             -- 1 tab == 4 spaces
 vim.opt.smartindent = true      -- Autoindent new lines
 
 
--- prepare keymap settings before loading plugins
-vim.g.mapleader = "<"
-vim.g.maplocalleader = "<"

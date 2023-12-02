@@ -13,8 +13,8 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.leader = "<"
-vim.g.leadermap = "<"
+vim.g.leader = "<space>"
+vim.g.leadermap = "<space>"
 
 local opts = {
     ui = {
@@ -25,22 +25,15 @@ local opts = {
     },
     performance = {
         rtp = {
-    		disabled_plugins = {
-			    "gzip",
-		    	"matchit",
-	    		"matchparen",
-    			"netrw",
-			    "netrwPlugin",
-		    	"tarPlugin",
-	    		"tohtml",
-    			"tutor",
-		    	"zipPlugin",
-	    	},
-    	},
+            disabled_plugins = {
+            	-- "netrw",
+	    	-- "netrwPlugin",
+	    },
+        },
     },
-	change_detection = {
-		notify = false,
-	},
+    change_detection = {
+	notify = false,
+    },
 }
 
 require("lazy").setup("plugins", opts)
