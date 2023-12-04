@@ -53,8 +53,10 @@ return {
         local function get_projects(max_shown)
             local alphabet = "abcdefghijknopqrstuvwxyz"
             local dashboard = require("alpha.themes.dashboard")
+            local project_actions = require("telescope._extensions.project.actions")        
             local project_list = require("telescope._extensions.project.utils").get_projects("recent")
-            
+            local telescope_builtin = require('telescope.builtin')
+
             local tbl = {
                 { type = "text", val = "Recent Projects", opts = { hl = "SpecialComment", position = "center" } },
             }
@@ -95,11 +97,24 @@ return {
                 alphabet = alphabet:gsub(letter, "")
 
                 -- create button element
-                local file_button_el = dashboard.button(
-                    letter,
-                    icon .. display_path,
-                    "<cmd>lua require('telescope.builtin').find_files( { cwd = '" .. project.path:gsub("\\", "/") .. "' }) <cr>"
-                )
+                local file_button_el = {
+                    type = "button",
+                    val = icon .. project.path,
+                    on_press = function()
+                        vim.cmd("cd " .. project.path)
+                        vim.cmd("SessionManager load_current_dir_session")
+                        -- telescope_builtin.live_grep()
+                    end,
+                    opts = {
+                        position = "center",
+                        shortcut = letter,
+                        cursor = 3,
+                        width = 50,
+                        align_shortcut = "right",
+                        hl_shortcut = "Keyword",
+                        autocd=true,
+                    }
+                }
 
                 -- create hl group for the start of the path
                 local fb_hl = {}

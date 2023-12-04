@@ -3,15 +3,22 @@ return {
     version = '*',
     config = function()
         
-        vim.keymap.set('n', 'gxt', ':FocusSplitNicely cmd term<CR>')
+        vim.keymap.set('n', 'gsn', ':FocusSplitNicely cmd term<CR>')
+        vim.keymap.set('n', 'gsr', ':FocusSplitRight cmd Telescope live_grep <CR>')
+        vim.keymap.set('n', 'gsd', ':FocusSplitDown cmd term <CR>')
+
+        vim.keymap.set('n', 'gst', ':FocusToggle<CR>')
+        vim.keymap.set('n', 'gsm', ':FocusMaxOrEqual<CR>')
+        --vim.keymap.set('n', 'gst', ':FocusSplitNicely cmd term<CR>')
+        --vim.keymap.set('n', 'gst', ':FocusSplitNicely cmd term<CR>')
 
         require("focus").setup({
             enable = true, -- Enable module
             commands = true, -- Create Focus commands
             autoresize = {
                 enable = true, -- Enable or disable auto-resizing of splits
-                width = 0, -- Force width for the focused window
-                height = 0, -- Force height for the focused window
+                width = 0,     -- Force width for the focused window
+                height = 0,    -- Force height for the focused window
                 minwidth = 0, -- Force minimum width for the unfocused window
                 minheight = 0, -- Force minimum height for the unfocused window
                 height_quickfix = 10, -- Set the height of quickfix panel

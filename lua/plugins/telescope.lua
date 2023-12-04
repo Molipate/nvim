@@ -1,5 +1,6 @@
 return {
     'nvim-telescope/telescope.nvim',
+    lazy = false,
     dependencies = { 
         'nvim-lua/plenary.nvim',
         'nvim-tree/nvim-web-devicons',
@@ -19,15 +20,29 @@ return {
     },
     config = function()
         local builtin = require('telescope.builtin')
- 
-        -- vim.keymap.set('n', '<M-h>', builtin.help_tags, {})
+        local actions = require('telescope.actions')
+        local project_actions = require("telescope._extensions.project.actions") 
+
+        vim.keymap.set('n', '<M-H>', builtin.help_tags, {})
         vim.keymap.set('n', '<M-F>', "<Cmd>Telescope frecency<CR>", {})
         vim.keymap.set('n', '<M-f>', builtin.live_grep, {})
         vim.keymap.set('n', '<M-g>', builtin.find_files, {})
-        vim.keymap.set('n', '<M-b>', builtin.buffers, {})       
+        vim.keymap.set('n', '<M-b>', "<Cmd>Telescope buffers<CR><ESC>", {})      
+        vim.keymap.set('n', '<M-p>', "<Cmd>Telescope project<CR><ESC>", {})
 
         require('telescope').setup({
             defaults = {
+                mappings = {
+                    n = {
+                        ["d"] = actions.delete_buffer
+                    },
+                    i = {
+                        -- map actions.which_key to <C-h> (default: <C-/>)
+                        -- actions.which_key shows the mappings for your picker,
+                        -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+                        ["<C-h>"] = "which_key"
+                    }
+                },
                 layout_strategy = "horizontal",
                 layout_config = {
                     width = 0.8,
@@ -41,13 +56,9 @@ return {
                     ignore_patterns = {"*.git/*"},
                 },
                 project = {
-                    base_dirs = {
+                    base_dir = {
                         "~/work",
                     },
-                    -- default for on_project_selected = find project files
-                    on_project_selected = function(prompt_bufnr)
-                        vim.cmd(":cd " .. prompt_bufnr .. "<CR>")
-                    end,
                 }
             }
         })
