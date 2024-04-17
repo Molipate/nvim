@@ -1,9 +1,8 @@
 return {
     "neovim/nvim-lspconfig",
     config = function()
-
-        local on_attach = function (_, _)
-           vim.keymap.set("n", "<C-space>", vim.lsp.buf.code_action)
+        local on_attach = function(_, _)
+            vim.keymap.set("n", "<C-space>", vim.lsp.buf.code_action)
         end
 
         local lspconfig = require("lspconfig")
@@ -12,6 +11,10 @@ return {
         })
 
         lspconfig.pylsp.setup({
+            on_attach = on_attach
+        })
+
+        lspconfig.gopls.setup({
             on_attach = on_attach
         })
     end,
